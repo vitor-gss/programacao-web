@@ -136,6 +136,10 @@ h6 {
 	position: relative;
 }
 
+.banner img, #sla{
+	border-radius: 12px;
+}
+
 .banner {
 	background: #7a60ff;
 	background: linear-gradient(to left, #7a60ff, #cd9ffa);
