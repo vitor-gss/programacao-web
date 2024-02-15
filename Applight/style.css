@@ -788,7 +788,6 @@ input {
 }
 
 ::-webkit-scrollbar {
-
 	background: linear-gradient(#7a60ff, #5f0099);
 	width: 15px;
 }
@@ -803,3 +802,28 @@ input {
 	border-radius: 8px;
 }
 
+.entrar {
+	background-color: white;
+	color: #5f0099;
+	width: 150px;
+	text-align: center;
+	border-radius: 50px;
+	border: 1px solid white;
+}
+
+.entrar:hover {
+	background-color: rgb(240, 240, 240);
+}
+
+.cadastrar {
+	background-color: rgb(228, 167, 0);
+	color: #ffffff;
+	width: 150px;
+	text-align: center;
+	border-radius: 50px;
+}
+
+.cadastrar:hover{
+	background-color: rgb(218, 160, 0);
+	color: #ffffff;
+}
