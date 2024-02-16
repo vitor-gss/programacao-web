@@ -570,6 +570,8 @@ input {
 	background: #7a60ff;
 	background: linear-gradient(to left, #7a60ff, #cd9ffa);
 	cursor: pointer;
+
+	margin-bottom: 2%;
 }
 
 /* .btn-grad:hover{
@@ -826,4 +828,13 @@ input {
 .cadastrar:hover{
 	background-color: rgb(218, 160, 0);
 	color: #ffffff;
+}
+
+.space-between{
+	display: flex;
+	justify-content: space-between;
+}
+
+.no-padding{
+	padding: 0;
 }
