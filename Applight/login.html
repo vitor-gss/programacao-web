@@ -53,8 +53,8 @@
 					<form id="contact_form" action="">
 						<input type="email" id="email" class="form-input w-100" name="email" placeholder="E-mail"
 							required>
-						<input type="password" id="senha" class="form-input w-100" name="senha" placeholder="Senha">
-						<button class="btn-grad w-100 text-uppercase mb-2" type="submit" name="button">Entrar</button>
+						<input type="password" id="senha" class="form-input w-100" name="senha" placeholder="Senha" required>
+						<button class="btn-grad w-100 text-uppercase mb-2" type="submit" name="button" id="btnLogin">Entrar</button>
 						<div class="d-flex justify-content-between"> <!-- d-flex == Display: flex; -->
 							<button class="btn-esp-1 text-uppercase" type="button" name="button">Esqueceu a
 								senha?</button>
@@ -78,6 +78,13 @@
 			</div>
 		</div>
 	</footer>
+	<script>
+		const frm = document.querySelector('form')
+		frm.addEventListener("submit", e => {
+			e.preventDefault()
+			window.location.href = './inicial.html'
+		})
+	</script>
 </body>
 
 </html>

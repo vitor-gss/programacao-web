@@ -534,6 +534,11 @@ h6 {
 	border-radius: 8px;
 }
 
+#contact_form select {
+	color: #757575;
+	font-size: medium;
+}
+
 input {
 	height: 42px;
 	padding: 0 1rem;
@@ -572,7 +577,8 @@ input {
 	cursor: pointer;
 }
 
-.btn-esp-1, .btn-esp-2{
+.btn-esp-1,
+.btn-esp-2 {
 	padding: .7rem 2rem;
 	display: inline-block;
 	color: #fff;
@@ -582,12 +588,12 @@ input {
 	cursor: pointer;
 }
 
-.btn-esp-1{
+.btn-esp-1 {
 	background-color: white;
 	color: black;
 }
 
-.btn-esp-2{
+.btn-esp-2 {
 	background-color: #bd85f4;
 }
 

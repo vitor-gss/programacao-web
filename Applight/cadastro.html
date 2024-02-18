@@ -29,12 +29,11 @@
         <!-- <span class="svg-wave"> <img class="svg-hero" src="images/applight-wave.svg"> </span> -->
     </section>
 
-
-    <div class="section-content">
+    <div class="section-content mt-3">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-8 col-md-6 col-xl-4">
-                    <h2 class="mb-3 ms-auto text-center">Cadastre-se</h2>
+                    <h2 class="mb-3 ms-auto text-center ">Cadastre-se</h2>
                     <form id="contact_form" action="">
                         <div class="d-flex justify-content-between"> <!-- d-flex == Display: flex; -->
                             <input type="text" id="nome" class="form-input w-50" name="nome" placeholder="Nome"
@@ -44,17 +43,33 @@
                         </div>
                         <input type="email" id="email" class="form-input w-100" name="email" placeholder="E-mail"
                             required>
-                        <input type="date" class="form-input w-100" name="date" id="date">
-                            <input type="password" id="senha" class="form-input w-100" name="senha" placeholder="Senha">
-                            <input type="password" id="confirmarSenha" class="form-input w-100" name="confirmarSenha"
-                                placeholder="Confirmar senha">
-                            <button class="btn-grad w-100 text-uppercase" type="submit"
-                                name="button">Cadastrar</button>
-                        </form>
+                        <!-- <input type="date" class="form-input w-100" name="date" id="date" placeholder="Data de nascimento"> -->
+                        <div class="d-flex justify-content-between">
+                            <select class="form-control form-input mb-3" required>
+                                <option>Estado</option>
+                                <option>Alagoas</option>
+                            </select>
+                            <select class="form-control form-input mb-3 ml-2">
+                                <option>Cidade</option>
+                                <option>Rio Largo</option>
+                                <option>Maceió</option>
+                            </select>
+                        </div>
+                        <input type="password" id="senha" class="form-input w-100" name="senha" placeholder="Senha"
+                            required>
+                        <input type="password" id="confirmarSenha" class="form-input w-100" name="confirmarSenha"
+                            placeholder="Confirmar senha" required>
+                        <button class="btn-grad w-100 text-uppercase" type="submit" name="button"
+                            id="btnCadastro">Cadastrar</button>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <label for="">Já tem uma conta? </label>
+                            <a href="./login.html"><button class="btn-esp-2 text-uppercase w-100" type="button"
+                                    name="button">Entrar</button></a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <footer class="footer-copy">
         <div class="container-fluid">
@@ -67,6 +82,16 @@
         </div>
     </footer>
     <script>
+        const frm = document.querySelector('form')
+        frm.addEventListener("submit", e => {
+            e.preventDefault()
+            if(frm.senha.value == frm.confirmarSenha.value){
+                window.location.href = './inicial.html'
+            }else{
+                alert('As senhas são diferentes')
+            }
+
+        })
     </script>
 </body>
 
