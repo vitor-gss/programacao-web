@@ -570,8 +570,25 @@ input {
 	background: #7a60ff;
 	background: linear-gradient(to left, #7a60ff, #cd9ffa);
 	cursor: pointer;
+}
 
-	margin-bottom: 2%;
+.btn-esp-1, .btn-esp-2{
+	padding: .7rem 2rem;
+	display: inline-block;
+	color: #fff;
+	border-radius: 2rem;
+	border: 0;
+	box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.267);
+	cursor: pointer;
+}
+
+.btn-esp-1{
+	background-color: white;
+	color: black;
+}
+
+.btn-esp-2{
+	background-color: #bd85f4;
 }
 
 /* .btn-grad:hover{
@@ -825,16 +842,16 @@ input {
 	border-radius: 50px;
 }
 
-.cadastrar:hover{
+.cadastrar:hover {
 	background-color: rgb(218, 160, 0);
 	color: #ffffff;
 }
 
-.space-between{
+.space-between {
 	display: flex;
 	justify-content: space-between;
 }
 
-.no-padding{
+.no-padding {
 	padding: 0;
 }
