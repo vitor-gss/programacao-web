@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Vixz</title>
+    <link rel="icon" href="vixz.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <link rel="stylesheet" href="./css/animate.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style-login.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand navbar-logo" href="../Applight/index.html"> <img src="vixz.png" alt="logo"
+                    class="logo-1"> </a>
+        </div>
+    </nav>
+    <section class="banner">
+        <!-- <span class="svg-wave"> <img class="svg-hero" src="images/applight-wave.svg"> </span> -->
+    </section>
+
+    <div class="section-content mt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-8 col-md-6 col-xl-4">
+                    <h2 class="mb-3 ms-auto text-center ">Cadastre-se</h2>
+                    <form id="contact_form" action="">
+                        <div class="d-flex justify-content-between">
+                            <!-- d-flex == Display: flex; -->
+                            <input type="text" id="nome" class="form-input w-50" name="nome" placeholder="Nome"
+                                required>
+                            <input type="text" id="sobrenome" class="form-input w-50 ml-2" name="sobrenome"
+                                placeholder="Sobrenome" required>
+                        </div>
+                        <input type="email" id="email" class="form-input w-100" name="email" placeholder="E-mail"
+                            required>
+                        <!-- <input type="date" class="form-input w-100" name="date" id="date" placeholder="Data de nascimento"> -->
+                        <div class="d-flex justify-content-between">
+                            <select class="form-control form-input mb-3" required>
+                                <option>Estado</option>
+                                <option>Alagoas</option>
+                            </select>
+                            <select class="form-control form-input mb-3 ml-2">
+                                <option>Cidade</option>
+                                <option>Rio Largo</option>
+                                <option>Maceió</option>
+                            </select>
+                        </div>
+                        <input type="password" id="senha" class="form-input w-100" name="senha" placeholder="Senha"
+                            required>
+                        <input type="password" id="confirmarSenha" class="form-input w-100" name="confirmarSenha"
+                            placeholder="Confirmar senha" required>
+                        <button class="btn-grad w-100 text-uppercase" type="submit" name="button"
+                            id="btnCadastro">Cadastrar</button>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <label for="">Já tem uma conta? </label>
+                            <a href="./login.html"><button class="btn-esp-2 text-uppercase w-100" type="button"
+                                    name="button">Entrar</button></a>
+                        </div>
+                        <div id="msg"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-copy">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-md-12">
+                    <p>2024 &copy; Vixz. Website desenvolvido por <a href="#" target="_blank" rel="dofollow">Vixz</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const frm = document.querySelector('form')
+        const msg = document.querySelector('#msg')
+        frm.addEventListener("submit", e => {
+            e.preventDefault()
+            if (frm.senha.value == frm.confirmarSenha.value) {
+                window.location.href = './inicial.html'
+            } else {
+                msg.innerHTML = '<div class="alert alert-danger mt-4" role="alert"> <i class="bi bi-x-lg"></i> As senhas não são iguais</div>'
+            }
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
