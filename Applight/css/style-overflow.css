@@ -1,0 +1,13 @@
+::-webkit-scrollbar {
+	background: linear-gradient(#7a60ff, #5f0099);
+	width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(#bf7eff, #debcff);
+    width: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(#ce9cff, #bd85f4);
+}
