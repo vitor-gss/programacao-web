@@ -1,24 +1,32 @@
 const chamarDetalhes = (vagaId) => {
-    location.href = `detalhe.html?cardId=${vagaId}`;
+  location.href = `detalhe.html?cardId=${vagaId}`;
 }
 
 function obterParametroDaURL(nomeDoParametro) {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    return urlSearchParams.get(nomeDoParametro);
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  return urlSearchParams.get(nomeDoParametro);
 }
 
 // Obtenha o ID da vaga da URL
 const cardId = obterParametroDaURL('cardId');
 
 function criarDetalhesHTML(vaga) {
-    return `
-    <div class="col-12">
-    <img src="${vaga.img}" class="card-img-top" alt="...">
-    <div class="border-bottom mb-3 mt-3"></div>
-    <div class="card-body">
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  return `
+  <div class="card d-flex flex-row">
+    <div class="col-3 align-items-center d-flex">
+      <img src="${vaga.img}" class="card-img-top ajuste-img img-fluid" alt="...">
     </div>
-  </div>
+    <div class="col-9">
+    <div class="card-body">
+        <h5 class="card-title">${vaga.nome}</h5>
+        <p class="card-text">${vaga.empresa}</p>
+        <p class="card-text">${(vaga.salario).toLocaleString('pt-br', { style: 'currency', currency:'BRL' })}</p>
+    </div>
+    <div class="btn">
+    <button type="button" class="btn btn-success">Candidatar-se</button>
+    </div>
+    </div>
+</div>
     `;
 }
 
