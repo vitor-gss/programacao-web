@@ -12,8 +12,9 @@ const cardId = obterParametroDaURL('cardId');
 
 function criarDetalhesHTML(vaga) {
     return `
-    <div class="card" style="width: 18rem;">
+    <div class="col-12">
     <img src="${vaga.img}" class="card-img-top" alt="...">
+    <div class="border-bottom mb-3 mt-3"></div>
     <div class="card-body">
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
