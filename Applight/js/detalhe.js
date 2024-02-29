@@ -17,16 +17,16 @@ function criarDetalhesHTML(vaga) {
       <img src="${vaga.img}" class="card-img-top ajuste-img img-fluid" alt="...">
     </div>
     <div class="col-9">
-    <div class="card-body">
+      <div class="card-body">
         <h5 class="card-title">${vaga.nome}</h5>
         <p class="card-text">${vaga.empresa}</p>
         <p class="card-text">${(vaga.salario).toLocaleString('pt-br', { style: 'currency', currency:'BRL' })}</p>
+        </div>
+        <div class="d-flex justify-content-end align-items-bottom me-3">
+        <button type="button" class="btn btn-success">Candidatar-se</button>
+        </div>
+      </div>
     </div>
-    <div class="btn">
-    <button type="button" class="btn btn-success">Candidatar-se</button>
-    </div>
-    </div>
-</div>
     `;
 }
 

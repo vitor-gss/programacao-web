@@ -82,9 +82,12 @@
 		const frm = document.querySelector('form')
 		frm.addEventListener("submit", e => {
 			e.preventDefault()
+			localStorage.setItem("email", frm.email.value)
+			localStorage.setItem("senha", frm.senha.value)
 			window.location.href = './inicial.html'
 		})
 	</script>
+	<script src="./js/dadosUser.js"></script>
 </body>
 
 </html>
