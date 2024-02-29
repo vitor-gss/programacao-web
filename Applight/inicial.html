@@ -37,13 +37,29 @@
 			object-fit: contain;
 		}
 
-		@media (min-width: 768px){
-			.ajuste-img{
+		.card {
+			width: 16rem;
+		}
+
+		@media (min-width: 768px) {
+			.ajuste-img {
 				width: 100%;
 				height: auto;
 				object-fit: cover;
 			}
+
+			.card {
+				width: 14rem;
+			}
 		}
+
+		@media (max-width: 767px){
+			.card{
+
+				width: 100%;
+			}
+		}
+
 		.card:hover {
 			scale: 1.01;
 			box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.059);
@@ -65,12 +81,13 @@
 				<h1>Lorem ipsum dolor sit amet.</h1>
 			</div>
 		</div>
-		<div class="row justify-content-between">
+		<div class="row justify-content-between mb-5">
 			<div class="col-12 mt-3">
 				<h3 class="mb-4 text-secondary-emphasis">Confira algumas vagas de emprego:</h3>
 			</div>
-			<div class="col-12 d-flex flex-wrap justify-content-between gap-2 mb-5" id="cards">
+			<div class="col-12 d-flex flex-wrap justify-content-between gap-2" id="cards">
 			</div>
+
 		</div>
 	</div>
 	</div>
