@@ -90,6 +90,8 @@
         frm.addEventListener("submit", e => {
             e.preventDefault()
             if (frm.senha.value == frm.confirmarSenha.value) {
+                localStorage.setItem("email", frm.email.value)
+                localStorage.setItem("senha", frm.senha.value)
                 window.location.href = './inicial.html'
             } else {
                 msg.innerHTML = '<div class="alert alert-danger mt-4" role="alert"> <i class="bi bi-x-lg"></i> As senhas não são iguais</div>'
