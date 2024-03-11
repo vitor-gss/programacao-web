@@ -61,7 +61,7 @@
 							<a href="./cadastro.html"><button class="btn-esp-2 text-uppercase text-center" type="button"
 									name="button">Cadastrar</button></a>
 						</div>
-
+                        <div id="msg"></div>
 					</form>
 				</div>
 			</div>
@@ -80,11 +80,16 @@
 	</footer>
 	<script>
 		const frm = document.querySelector('form')
+		const msg = document.querySelector('#msg')
 		frm.addEventListener("submit", e => {
 			e.preventDefault()
-			localStorage.setItem("email", frm.email.value)
-			localStorage.setItem("senha", frm.senha.value)
-			window.location.href = './inicial.html'
+			if(localStorage.getItem("email") != frm.email.value){
+				msg.innerHTML = '<div class="alert alert-danger mt-4" role="alert"> <i class="bi bi-x-lg"></i>E-mail não cadastrado</div>'
+			}else if(localStorage.getItem("senha") != frm.senha.value){
+				msg.innerHTML = '<div class="alert alert-danger mt-4" role="alert"> <i class="bi bi-x-lg me-2"></i>Senha incorreta</div>'
+			}else{
+				window.location.href = './inicial.html'
+			}
 		})
 	</script>
 	<!-- <script src="./js/dadosUser.js"></script> -->

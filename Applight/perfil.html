@@ -23,18 +23,37 @@
 	<div id="header"></div>
 	<div class="container mt-5">
 		<h3>Meu perfil:</h3>
-		<div class="row">
-			<form>
+		<form>
+				<div class="row">
+				<div class="col-6 mb-3">
+					<label for="">Nome</label>
+					<input type="text" class="form-control" id="nome" readonly>
+				</div>
+				<div class="col-6 mb-3">
+					<label for="">Sobrenome</label>
+					<input type="text" class="form-control" id="sobrenome" readonly>
+				</div>
+				<div class="col-6 mb-3">
+					<label for="">Cidade</label>
+					<input type="text" class="form-control" id="cidade" readonly>
+				</div>
+				<div class="col-6 mb-3">
+					<label for="">Estado</label>
+					<input type="text" class="form-control" id="estado" readonly>
+				</div>
 				<div class="mb-3">
 					<label for="email" class="form-label">Email</label>
-					<input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" readonly>
 				</div>
 				<div class="mb-3">
-					<label for="senha" class="form-label">Senha</label>
-					<input type="email" class="form-control" id="senha" aria-describedby="emailHelp">
+					<div class="d-flex flex-row justify-content-between">
+						<label for="senha" class="form-label">Senha</label> <label for="senha" class="form-label"
+							id="mostrarSenha">Mostrar senha</label>
+					</div>
+					<input type="password" class="form-control" id="senha" readonly>
 				</div>
+			</div>
 			</form>
-		</div>
 	</div>
 	<script src="./js/dadosUser.js"></script>
 	<script src="./js/header-user.js"></script>

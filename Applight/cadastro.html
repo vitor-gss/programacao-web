@@ -47,11 +47,11 @@
                             required>
                         <!-- <input type="date" class="form-input w-100" name="date" id="date" placeholder="Data de nascimento"> -->
                         <div class="d-flex justify-content-between">
-                            <select class="form-control form-input mb-3" required>
+                            <select class="form-control form-input mb-3" id="estado">
                                 <option>Estado</option>
                                 <option>Alagoas</option>
                             </select>
-                            <select class="form-control form-input mb-3 ml-2">
+                            <select class="form-control form-input mb-3 ml-2" id="cidade">
                                 <option>Cidade</option>
                                 <option>Rio Largo</option>
                                 <option>Maceió</option>
@@ -86,11 +86,17 @@
     </footer>
     <script>
         const frm = document.querySelector('form')
+        const estado = document.querySelector("#estado")
+        const cidade = document.querySelector("#cidade")
         const msg = document.querySelector('#msg')
         frm.addEventListener("submit", e => {
             e.preventDefault()
             if (frm.senha.value == frm.confirmarSenha.value) {
+                localStorage.setItem("nome", frm.nome.value)
+                localStorage.setItem("sobrenome", frm.sobrenome.value)
                 localStorage.setItem("email", frm.email.value)
+                localStorage.setItem("estado", estado.value)
+                localStorage.setItem("cidade", cidade.value)
                 localStorage.setItem("senha", frm.senha.value)
                 window.location.href = './inicial.html'
             } else {

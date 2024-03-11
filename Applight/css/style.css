@@ -869,3 +869,7 @@ input {
 .logo{
 	z-index: 9999
 }
+
+#mostrarSenha{
+	cursor: pointer;
+}
