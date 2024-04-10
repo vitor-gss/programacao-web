@@ -8,7 +8,7 @@
     ## Criou pasta src
     ## Criou arquivo src/index.js
 
-# Exechtar
+# Executar
     node src/index.js
 
 # Instalar express
