@@ -1,15 +1,18 @@
 const express = require('express')
 const app = express()
+
 const port = 3000
-app.use(express.json())
+
+// app.use(express.json())
+app.listen(express.urlencoded())
 
 app.get('/', (req, res)=> {
-	res.send(`Hello Vitor! ${req.method}`)
+	res.send(`Hello Vitor!`)
 })
 
 app.post('/', function (req, res) {
-	console.log(req.body);
-	res.send('POST');
+	let chapa = req.body.chapa1
+	res.send(`Olá ${chapa.nome}, ${chapa.presidente}, ${chapa.diretor_politicas}`);
 });
 
 app.listen(port, () => {
