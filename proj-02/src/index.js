@@ -3,8 +3,8 @@ const app = express()
 
 const port = 3000
 
-// app.use(express.json())
-app.listen(express.urlencoded())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res)=> {
 	res.send(`Hello Vitor!`)
@@ -19,4 +19,3 @@ app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`)
 })
 
-// Projeto do vitu Vytuua
