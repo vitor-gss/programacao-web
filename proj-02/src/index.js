@@ -10,7 +10,7 @@ app.get('/', (req, res)=> {
 })
 
 app.post('/salvar', (req, res) => {
-	let nome = req.body.nome
+let nome = req.body.nome
 	let email = req.body.email
 	let subject = req.body.subject
 	let message = req.body.message
