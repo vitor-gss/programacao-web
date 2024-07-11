@@ -1,6 +1,6 @@
-const fetch = require("node-fetch");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
  
- fetch('https://localhost:3000', {
+ fetch('http://localhost:3000/teste/', {
    method: "GET",
    headers: {"Content-type": "application/json;charset=UTF-8"}
  })

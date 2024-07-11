@@ -1,4 +1,3 @@
-// import fetch from "node-fetch";
 const express = require('express');
 
 const app = express();
@@ -9,11 +8,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // GET
 app.get('/', (req, res) => {
-  res.send('Rota GET: Olá, Mundo!');
+  res.send(JSON.stringify('Rota GET: Olá, Mundo!'));
 });
 
 app.get('/teste', (req, res) => {
-  res.send('Rota de teste: Oi');
+  res.send(JSON.stringify('Rota de teste: Oi'));
 });
 
 // POST
