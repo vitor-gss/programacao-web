@@ -1,11 +1,10 @@
 const express = require('express')
+const passaros = require('./passaros')
 const app = express()
 const port = 3000
 
-// function funcaoGet(req, res){
-// 	res.send('Hello World"')
-// }
 
+app.use('/passaros', passaros)
 app.use(express.json())
 
 app.get('/', (req, res) => {
