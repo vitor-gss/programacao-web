@@ -4,10 +4,9 @@
         # npm init
     3. Instalar express
         # npm install express --save
-        1. Atualizar node:
-            # [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
-            # ls -a | grep .nvm
-            # git clone http://github.com/creationix/nvm.git .nvm
-            # nvm install 20
-    4. 
+2. try e catch
+    # try: Código que pode gerar erros.
+    # catch: Lidar com as exceções.
+    # Finale: Executa independente de ter erro ou não.
+    # Throw: Muda o error.message
 
