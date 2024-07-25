@@ -1,7 +1,8 @@
-class numeroNegativo extends Error{
-    constructor(){
-        throw new Error('Algum dos números é negativo')
+class TiposDeErros extends Error{
+    constructor(message){
+        super(message)
+        this.name = "Erro customizado: \n------------------\n";
     }
 }
 
-export default numeroNegativo;
+export default TiposDeErros;
