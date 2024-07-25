@@ -1,9 +1,9 @@
 import TiposDeErros from './TiposDeErros.js';
 
 try {
+	const erros = []
 	const nota = 81
 	const nomeAluno = 'Vitoriosoadsadadadasd'
-	const erros = []
 
 	// Verificar se nota está entre 0 e 10
 	if(nota < 0){
@@ -21,12 +21,14 @@ try {
 		console.log('Nome válido');
 	}
 
-	if(erros.length > 0){
-		throw new TiposDeErros(erros)
-	}
+
 
 
 } catch (error) {
+
+	if(erros.length > 0){
+		throw new TiposDeErros(erros)
+	}
 	console.log(error.name);
 	console.log(error.message);
 }
