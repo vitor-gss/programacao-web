@@ -1,9 +1,16 @@
-import TiposDeErros from './TiposDeErros.js';
+import ErrosValidacao from './ErrosValidacao.js';
+import ErrosSistema from './ErrosSistema.js';
+const erros = []
+const statusSystem = 500
 
 try {
-	const erros = []
-	const nota = 81
-	const nomeAluno = 'Vitoriosoadsadadadasd'
+
+	if(statusSystem == 500){ // Verifica erro no sistema
+		throw new ErrosSistema('Erro no servidor')
+	}
+
+	const nota = 100 // Entre 0 e 10
+	const nomeAluno = 'Vitorioso12345' // Precisa ter menos de 10 letras
 
 	// Verificar se nota está entre 0 e 10
 	if(nota < 0){
@@ -20,15 +27,12 @@ try {
 	} else{
 		console.log('Nome válido');
 	}
-
-
-
+	
+	if(erros.length > 0){
+		throw new ErrosValidacao(erros)
+	}
 
 } catch (error) {
-
-	if(erros.length > 0){
-		throw new TiposDeErros(erros)
-	}
 	console.log(error.name);
 	console.log(error.message);
 }
