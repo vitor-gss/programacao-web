@@ -35,13 +35,25 @@ npm install express
 npm install node-fetch
 ```
 
+5. Usar o import ao invés ddo require:
+* Alterar o package.json
+```
+{
+  "name": "fetch-promises",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  ...
+}
+```
+
 ## Criando o Servidor Express
 Vamos começar criando um servidor básico com Express.
 
 1. Crie um arquivo index.js na pasta do projeto:
 ```
-const express = require('express');
-const fetch = require('node-fetch');
+import express, { json } from 'express';
+import fetch from 'node-fetch';
 
 const app = express();
 const PORT = 3000;
