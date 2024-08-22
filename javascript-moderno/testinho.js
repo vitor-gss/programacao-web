@@ -8,10 +8,13 @@ const result = () => {
         Diz se tem algum número maior que 101: ${arr.some(num => num > 101 )} \n
         Diz se tem algum número maior que 500: ${arr.some(num => num > 500 )} \n
         Diz se todos os números sao maiores ou iguais a 0: ${arr.every(num => num >= 0 )} \n
-        ${arr.forEach()}
-
     `
-    return text
+    console.log("Imprimindo cada número:");
+    arr.forEach(num => {
+        console.log(num);
+    });
+
+    return text;
 }
 
 console.log(result());
