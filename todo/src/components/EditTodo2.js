@@ -1,6 +1,6 @@
 import React from 'react'
 
- const EditTodo = () => {
+ const EditTodo2 = () => {
 
   return (
   <>
@@ -62,4 +62,4 @@ import React from 'react'
 	  )
 }
 
-export default EditTodo
+export default EditTodo2
