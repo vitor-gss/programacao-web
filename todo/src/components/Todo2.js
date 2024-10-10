@@ -1,5 +1,7 @@
 import React from "react"
 import EditTodo2 from "./EditTodo2"
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+
 
 const Todo2 = () => {
 return (
@@ -38,9 +40,6 @@ return (
 								className="btn btn-danger float-end">Excluir
 							</button>
 						</div>
-					</div>
-
-					<div className="todo-list">
 						<div className="todo-item">
 							<hr />
 							<span>
@@ -51,7 +50,7 @@ return (
 										/>
 									</span>
 								</div>
-								&nbsp; Go hard or Go Home<br />
+								&nbsp; Banana<br />
 								<i>10/11/2024</i>
 							</span>
 							<span className=" float-end mx-3">
