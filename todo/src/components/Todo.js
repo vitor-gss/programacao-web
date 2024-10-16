@@ -1,7 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore'
+import { db } from '../services/firebase.config'
 import EditTodo from "./EditTodo.js"
 
+
 const Todo = () => {
+	const collectionRef = collection(db, 'todo');
+	const [createTodo, setCreateTodo] = useState("")
+	const [todos, setTodo] = useState([])
+
+	useEffect(() => {
+		const getTodo = async () => {
+  		await getDocs(collectionRef).then((todo) => {
+    	let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: "4AJucnYYSRkpyB0wfF5P" }))
+    	setTodo(todoData)
+    	}).catch((err) => {
+      	console.log(err);
+    	})
+  }
+getTodo()
+}, [])
+
+	const submitTodo = async (e) => {
+		e.preventDefault();
+		try {
+		  await addDoc(collectionRef, {
+			todo: createTodo,
+			isChecked: false,
+			timestamp: serverTimestamp()
+		  })
+		  window.location.reload();
+		} catch (err) {
+		  console.log(err);
+		}
+	  }
+
 return (
 <>
  <div className="container">
@@ -17,28 +50,30 @@ return (
 					</button>
 
 
-		<div className="todo-list">
-			<div className="todo-item">
-				<hr />
-				<span>
-					<div className="checker" >
-						<span className="" >
-							<input
-								type="checkbox"
-							/>
-						</span>
-					</div>
-					&nbsp; Go hard or Go Home<br />
-					<i>10/11/2022</i>
-				</span>
-				<span className=" float-end mx-3">
-					<EditTodo /></span>
-				<button
-					type="button"
-					className="btn btn-danger float-end">Delete
-				</button>
-							</div>
-						</div>
+		{todos.map(({ todo, id }) =>
+  				<div className="todo-list" key={id}>
+    				<div className="todo-item">
+      				<hr />
+      				<span>
+        				<div className="checker" >
+          				<span className="" >
+            				<input
+              				type="checkbox"
+            				/>
+          				</span>
+        				</div>
+        				&nbsp;{todo}<br />
+        				<i>10/11/2022</i>
+      				</span>
+      				<span className=" float-end mx-3">
+        				<EditTodo /></span>
+    				<button
+      				type="button"
+      				className="btn btn-danger float-end">Delete
+    				</button>
+    				</div>
+  				</div>
+		)}
 					</div>
 				</div>
 			</div>
@@ -53,7 +88,7 @@ return (
 	 aria-labelledby="addModalLabel"
 	 aria-hidden="true">
 	<div className="modal-dialog">
-	<form className="d-flex">
+	<form className="d-flex" onSubmit={submitTodo}>
 		<div className="modal-content">
 			<div className="modal-header">
 	<h5
@@ -72,7 +107,8 @@ return (
 		<input
 			type="text"
 			className="form-control"
-			placeholder="Add a Todo"
+			placeholder="Descrição da tarefa"
+			onChange={(e) => setCreateTodo(e.target.value)}
 		/>
 	</div>
 	<div className="modal-footer">
