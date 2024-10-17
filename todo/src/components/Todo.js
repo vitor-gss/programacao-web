@@ -15,7 +15,7 @@ const Todo = () => {
 	useEffect(() => {
 		const getTodo = async () => {
   		await getDocs(collectionRef).then((todo) => {
-    	let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: "4AJucnYYSRkpyB0wfF5P" }))
+    	let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
     	setTodo(todoData)
     	}).catch((err) => {
       	console.log(err);
@@ -24,7 +24,20 @@ const Todo = () => {
 getTodo()
 }, [])
 
-   //Delete Handler
+const submitTodo = async (e) => {
+	e.preventDefault();
+	try {
+	  await addDoc(collectionRef, {
+		todo: createTodo,
+		isChecked: false,
+		timestamp: serverTimestamp()
+	  })
+	  window.location.reload();
+	} catch (err) {
+	  console.log(err);
+	}
+  }
+
    const deleteTodo = async (id) => {
 	try {
 	   window.confirm("Are you sure you want to delete this Todo?")
@@ -35,20 +48,6 @@ getTodo()
 	   console.log(err);
 	 }
    }
-
-	const submitTodo = async (e) => {
-		e.preventDefault();
-		try {
-		  await addDoc(collectionRef, {
-			todo: createTodo,
-			isChecked: false,
-			timestamp: serverTimestamp()
-		  })
-		  window.location.reload();
-		} catch (err) {
-		  console.log(err);
-		}
-	  }
 
 return (
 <>
@@ -65,32 +64,32 @@ return (
 					</button>
 
 
-		{todos.map(({ todo, id }) =>
-  				<div className="todo-list" key={id}>
-    				<div className="todo-item">
-      				<hr />
-      				<span>
-        				<div className="checker" >
-          				<span className="" >
-            				<input
-              				type="checkbox"
-            				/>
-          				</span>
-        				</div>
-        				&nbsp;{todo}<br />
-        				<i>10/11/2022</i>
-      				</span>
-      				<span className=" float-end mx-3">
-        				<EditTodo /></span>
-    				<button
-      				type="button"
-      				className="btn btn-danger float-end"
-					onClick={() => deleteTodo(id)}
-					>Delete
-    				</button>
-    				</div>
-  				</div>
-		)}
+					{todos.map(({ todo, id }) =>
+   <div className="todo-list" key={id}>
+     <div className="todo-item">
+       <hr />
+       <span>
+         <div className="checker" >
+           <span className="" >
+             <input
+               type="checkbox"
+             />
+           </span>
+         </div>
+         &nbsp;{todo}<br />
+         <i>10/11/2022</i>
+       </span>
+       <span className=" float-end mx-3">
+         <EditTodo todo={todo} id={id} />
+       </span>
+       <button
+         type="button"
+         className="btn btn-danger float-end"
+         onClick={() => deleteTodo(id)}
+       >Delete</button>
+     </div>
+   </div>
+)}
 					</div>
 				</div>
 			</div>
