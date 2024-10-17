@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc } from 'firebase/firestore'
+
 import { db } from '../services/firebase.config'
 import EditTodo from "./EditTodo.js"
 
@@ -8,6 +9,8 @@ const Todo = () => {
 	const collectionRef = collection(db, 'todo');
 	const [createTodo, setCreateTodo] = useState("")
 	const [todos, setTodo] = useState([])
+
+	console.log(createTodo)
 
 	useEffect(() => {
 		const getTodo = async () => {
@@ -20,6 +23,18 @@ const Todo = () => {
   }
 getTodo()
 }, [])
+
+   //Delete Handler
+   const deleteTodo = async (id) => {
+	try {
+	   window.confirm("Are you sure you want to delete this Todo?")
+	   const documentRef = doc(db, "todo", id);
+	   await deleteDoc(documentRef)
+	   window.location.reload();
+	   } catch (err) {
+	   console.log(err);
+	 }
+   }
 
 	const submitTodo = async (e) => {
 		e.preventDefault();
