@@ -84,7 +84,9 @@ return (
         				<EditTodo /></span>
     				<button
       				type="button"
-      				className="btn btn-danger float-end">Delete
+      				className="btn btn-danger float-end"
+					onClick={() => deleteTodo(id)}
+					>Delete
     				</button>
     				</div>
   				</div>
