@@ -40,9 +40,11 @@ const submitTodo = async (e) => {
 
    const deleteTodo = async (id) => {
 	try {
-	   window.confirm("Are you sure you want to delete this Todo?")
-	   const documentRef = doc(db, "todo", id);
-	   await deleteDoc(documentRef)
+	   const resposta = window.confirm("Are you sure you want to delete this Todo?")
+	   if(resposta){
+		   const documentRef = doc(db, "todo", id);
+		   await deleteDoc(documentRef)
+	   }
 	   window.location.reload();
 	   } catch (err) {
 	   console.log(err);
@@ -97,48 +99,47 @@ return (
 	</div>
 
 	{/* Modal */}
-	<div
+<div
 	 className="modal fade"
 	 id="addModal"
 	 tabIndex="-1"
 	 aria-labelledby="addModalLabel"
 	 aria-hidden="true">
 	<div className="modal-dialog">
-	<form className="d-flex" onSubmit={submitTodo}>
-		<div className="modal-content">
-			<div className="modal-header">
-	<h5
-	 className="modal-title"
-	 id="addModalLabel">
-	 Add Todo
-	</h5>
-	<button
-		 type="button"
-		 className="btn-close"
-		 data-bs-dismiss="modal"
-		 aria-label="Close">
-	</button>
-	</div>
-	<div className="modal-body">
-		<input
-			type="text"
-			className="form-control"
-			placeholder="Descrição da tarefa"
-			onChange={(e) => setCreateTodo(e.target.value)}
-		/>
-	</div>
-	<div className="modal-footer">
-	<button
-		className="btn btn-secondary"
-		data-bs-dismiss="modal">Close
-	</button>
-
-	<button className="btn btn-primary">Create Todo</button>
-					</div>
+		<form className="d-flex" onSubmit={submitTodo}>
+			<div className="modal-content">
+				<div className="modal-header">
+					<h5
+	 				className="modal-title"
+	 				id="addModalLabel">
+	 				Add Todo
+					</h5>
+					<button
+		 				type="button"
+		 				className="btn-close"
+		 				data-bs-dismiss="modal"
+		 				aria-label="Close">
+					</button>
 				</div>
-			</form>
-		</div>
+				<div className="modal-body">
+					<input
+						type="text"
+						className="form-control"
+						placeholder="Descrição da tarefa"
+						onChange={(e) => setCreateTodo(e.target.value)}
+					/>
+				</div>
+				<div className="modal-footer">
+					<button
+						className="btn btn-secondary"
+						data-bs-dismiss="modal">Close
+					</button>
+					<button className="btn btn-primary">Create Todo</button>
+				</div>
+			</div>
+		</form>
 	</div>
+</div>
 </>
 	)
 }

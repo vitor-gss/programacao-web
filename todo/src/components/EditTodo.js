@@ -57,7 +57,8 @@ const EditTodo = ({todo, id}) => {
   <button
     type="button"
     className="btn btn-secondary"
-    data-bs-dismiss="modal">
+    data-bs-dismiss="modal"
+    >
     Close
   </button>
   <button
