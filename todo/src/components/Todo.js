@@ -9,19 +9,22 @@ const Todo = () => {
 	const collectionRef = collection(db, 'todo');
 	const [createTodo, setCreateTodo] = useState("")
 	const [todos, setTodo] = useState([])
+	const [checked, setChecked] = useState([]);
+
 
 	console.log(createTodo)
 
 	useEffect(() => {
 		const getTodo = async () => {
-  		await getDocs(collectionRef).then((todo) => {
-    	let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    	setTodo(todoData)
-    	}).catch((err) => {
-      	console.log(err);
-    	})
-  }
-getTodo()
+			await getDocs(collectionRef).then((todo) => {
+			   let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+			   setTodo(todoData)
+			   setChecked(todoData)
+			  }).catch((err) => {
+				console.log(err);
+			  })
+			}
+			getTodo()
 }, [])
 
 const submitTodo = async (e) => {
@@ -50,6 +53,21 @@ const submitTodo = async (e) => {
 	   console.log(err);
 	 }
    }
+   const checkHandler = async (event, todo) => {
+	setChecked(state => {
+	const indexToUpdate = state.findIndex(checkBox => checkBox.id.toString() === event.target.name);
+	let newState = state.slice()
+	newState.splice(indexToUpdate, 1, {
+	...state[indexToUpdate],
+	isChecked: !state[indexToUpdate].isChecked,
+	})
+	setTodo(newState)
+	return newState
+	
+  })}
+  
+
+   
 
 return (
 <>
@@ -66,16 +84,19 @@ return (
 					</button>
 
 
-					{todos.map(({ todo, id }) =>
+					{todos.map(({ todo, id, isChecked }) =>
    <div className="todo-list" key={id}>
-     <div className="todo-item">
-       <hr />
-       <span>
+   <div className="todo-item">
+   <hr />
+   <span className={`${isChecked === true ? 'done' : ''}`}>
          <div className="checker" >
            <span className="" >
-             <input
-               type="checkbox"
-             />
+		   <input
+    type="checkbox"
+    defaultChecked={isChecked}
+    name={id}
+    onChange={(event) => checkHandler(event, todo)}
+/>
            </span>
          </div>
          &nbsp;{todo}<br />
@@ -131,6 +152,7 @@ return (
 				</div>
 				<div className="modal-footer">
 					<button
+						type='button'
 						className="btn btn-secondary"
 						data-bs-dismiss="modal">Close
 					</button>
