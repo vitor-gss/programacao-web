@@ -15,17 +15,16 @@ const Todo = () => {
 	console.log(createTodo)
 
 	useEffect(() => {
-		
 		const getTodo = async () => {
-			await getDocs(collectionRef).then((todo) => {
-			   let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-			   setTodo(todoData)
-			   setChecked(todoData)
-			  }).catch((err) => {
-				console.log(err);
-			  })
-			}
-			getTodo()
+		const q = query(collectionRef, orderBy('timestamp'))
+          await getDocs(q).then((todo) =>{let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+		  setTodo(todoData)
+		  setChecked(todoData)
+		 }).catch((err) => {
+		   console.log(err);
+		 })
+	   }
+		getTodo()
 }, [])
 
 
@@ -100,7 +99,7 @@ return (
 					</button>
 
 
-					{todos.map(({ todo, id, isChecked }) =>
+					{todos.map(({ todo, id, isChecked, timestamp }) =>
    						<div className="todo-list" key={id}>
    							<div className="todo-item">
    								<hr />
@@ -116,7 +115,8 @@ return (
            					</span>
          </div>
          &nbsp;{todo}<br />
-         <i>10/11/2022</i>
+         <i>{new Date(timestamp.seconds * 1000).toLocaleString()}</i>
+
        </span>
        <span className=" float-end mx-3">
          <EditTodo todo={todo} id={id} />
