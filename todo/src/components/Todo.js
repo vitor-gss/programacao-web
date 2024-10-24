@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc, runTransaction, orderBy, query  } from 'firebase/firestore'
 
 import { db } from '../services/firebase.config'
 import EditTodo from "./EditTodo.js"
@@ -15,6 +15,7 @@ const Todo = () => {
 	console.log(createTodo)
 
 	useEffect(() => {
+		
 		const getTodo = async () => {
 			await getDocs(collectionRef).then((todo) => {
 			   let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -26,6 +27,7 @@ const Todo = () => {
 			}
 			getTodo()
 }, [])
+
 
 const submitTodo = async (e) => {
 	e.preventDefault();
@@ -54,6 +56,20 @@ const submitTodo = async (e) => {
 	 }
    }
    const checkHandler = async (event, todo) => {
+	try {
+		const docRef = doc(db, "todo", event.target.name);
+		await runTransaction(db, async (transaction) => {
+		  const todoDoc = await transaction.get(docRef);
+		  if (!todoDoc.exists()) {
+			throw "Document does not exist!";
+		  }
+		  const newValue = !todoDoc.data().isChecked;
+		  transaction.update(docRef, { isChecked: newValue });
+		});
+		console.log("Transaction successfully committed!");
+	  } catch (error) {
+		console.log("Transaction failed: ", error);
+	  }
 	setChecked(state => {
 	const indexToUpdate = state.findIndex(checkBox => checkBox.id.toString() === event.target.name);
 	let newState = state.slice()
@@ -85,19 +101,19 @@ return (
 
 
 					{todos.map(({ todo, id, isChecked }) =>
-   <div className="todo-list" key={id}>
-   <div className="todo-item">
-   <hr />
-   <span className={`${isChecked === true ? 'done' : ''}`}>
-         <div className="checker" >
-           <span className="" >
-		   <input
-    type="checkbox"
-    defaultChecked={isChecked}
-    name={id}
-    onChange={(event) => checkHandler(event, todo)}
-/>
-           </span>
+   						<div className="todo-list" key={id}>
+   							<div className="todo-item">
+   								<hr />
+   							<span className={`${isChecked === true ? 'done' : ''}`}>
+         						<div className="checker" >
+           						<span className="" >
+		   						<input
+    									type="checkbox"
+    									defaultChecked={isChecked}
+    									name={id}
+    									onChange={(event) => checkHandler(event, todo)}
+									/>
+           					</span>
          </div>
          &nbsp;{todo}<br />
          <i>10/11/2022</i>
