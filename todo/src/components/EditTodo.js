@@ -25,7 +25,7 @@ const EditTodo = ({todo, id}) => {
   className="btn btn-primary"
   data-bs-toggle="modal"
   data-bs-target={`#id${id}`}      >
-  Edit Todo
+  Editar
 </button>
 
 <div
@@ -63,9 +63,9 @@ const EditTodo = ({todo, id}) => {
   </button>
   <button
     type="button"
-    className="btn btn-primary"
+    className="btn btn-success"
     onClick={e => updateTodo(e)}
-  >Update Todo</button>
+  >Atualizar</button>
 </div>
 		</div>
 	  </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc, runTransaction, orderBy, query  } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc, runTransaction, orderBy, query } from 'firebase/firestore'
 
 import { db } from '../services/firebase.config'
 import EditTodo from "./EditTodo.js"
@@ -95,7 +95,7 @@ return (
 						data-bs-toggle="modal"
 						data-bs-target="#addModal"
 						type="button"
-						className="btn btn-info">Add Todo
+						className="btn btn-secondary">Adicionar tarefa
 					</button>
 
 
@@ -125,7 +125,7 @@ return (
          type="button"
          className="btn btn-danger float-end"
          onClick={() => deleteTodo(id)}
-       >Delete</button>
+       >Excluir</button>
      </div>
    </div>
 )}
