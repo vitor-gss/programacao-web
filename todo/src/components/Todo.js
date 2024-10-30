@@ -16,14 +16,14 @@ const Todo = () => {
 
 	useEffect(() => {
 		const getTodo = async () => {
-		const q = query(collectionRef, orderBy('timestamp'))
-          await getDocs(q).then((todo) =>{let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-		  setTodo(todoData)
-		  setChecked(todoData)
-		 }).catch((err) => {
-		   console.log(err);
-		 })
-	   }
+			const q = query(collectionRef, orderBy('timestamp'))
+          	await getDocs(q).then((todo) =>{let todoData = todo.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+		  	setTodo(todoData)
+		  	setChecked(todoData)
+		 	}).catch((err) => {
+		   	console.log(err);
+		 	})
+	   	}
 		getTodo()
 }, [])
 
