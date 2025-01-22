@@ -1,7 +1,6 @@
 # Continuação:
 
 ## 1.  Adicionando firebase ao projeto
-<hr>
 
 1. Abra o [console do firebase](https://console.firebase.google.com/?hl=pt-br).
 2. Após acessar, clique em *criar um novo projeto*.
@@ -18,11 +17,21 @@
 npm install firebase
 ```
 6. Após a conclusão da instalação, acesse a pasta *./services* em seu código e crie o arquivo **firebase.config.js**
-7. Copie o código presente no firebase e adicione ao arquivo **firebase.config.js**.
+7. Na raiz do seu projeto, crie o arquivo **.env**. Depois, adicione o **.env** em seu arquivo **.gitignore**.
+8. No arquivo **.env**, adicione as seguintes linhas: No lugar de **xxxxx**, adicione os dados presentes no **SEU** firebase, **SEM AS ASPAS**.
+```js 
+REACT_APP_FIREBASE_API_KEY=xxxxx
+REACT_APP_FIREBASE_AUTH_DOMAIN=xxxxx
+REACT_APP_FIREBASE_PROJECT_ID=xxxxx
+REACT_APP_FIREBASE_STORAGE_BUCKET=xxxxx
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=xxxxx
+REACT_APP_FIREBASE_APP_ID=xxxxx
+``` 
 
 ![código firebase](./assets/chaveFirebase.png)
 
 ## 2. Firestore no projeto
-<hr> 
 
 1. Após a adição do firebase no projeto, é necessário criar um banco de dados no firebase. Para isso, abra o menu lateral ou acesse na tela inicial **Cloud Firestore** ou **Firestore Database**
+
+![Firestore](./assets/firestore.png)
