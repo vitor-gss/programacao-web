@@ -9,11 +9,12 @@
 2. npm install bootstrap
 
 3. Para usar bootstrap em todo projeto, inserir no topo index.js
-   ```js
+   ```
    import 'bootstrap/dist/css/bootstrap.min.css';
    ```
 ## Definindo Rotas e criando componentes
 4. Configurar BrowserRouter para as rotas no projeto, no arquivo **index.js**
+5. 
   ```js
   import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -33,7 +34,18 @@
   );
   ```
 
-5. Veja a seguir o exemplo dos componentes Home e About. No projeto, foi **criada/crie uma pasta components** dentro de src onde são colocados os componentes.
+5. Crie a estrutura das pastas do projeto. Deixe todas as pastas já criadas dentro de *src*:
+
+```shell
+├───components
+├───services
+...
+```
+
+**Criando os primeiros componentes próprios**
+
+ Veja a seguir o exemplo dos componentes Home e About. No projeto, foi **criada/crie uma pasta components** dentro de src onde são colocados os componentes.
+
  Repare que já há o uso das classes bootstrap em className="container mt-5".
 
   ```js
@@ -66,6 +78,7 @@
 
 1. O arquivo App.js já está preparado para receber as configurações de rotas.
    1. Necessário definir o um container  <Routes> com a definição de várias rotas <Route>. Cada componete de rota redenriza a página.
+   
     ```js
     <Routes>
         <Routes>
@@ -154,6 +167,7 @@ Note que o atributo *to="/produtos"* deve apontar para uma rota definida no <Rou
 9. Para encapsular a lógica que vai recuperar os dados de um banco de dados, no futuro, o firebase, vamos criar um componente de serviços. Para tal, criaremos uma pasta services dentro de src. Na parta, será criado um componente de serviço chamado ProdutosService.
 
 Por hora, ele vai guardar dados 'mockados' ou seja temporários. Veja trechos do código:
+
 ```js
 class ProdutosService {
   produtos = [
@@ -190,7 +204,7 @@ Ainda nessa de serviço, além dos dados, são necessários métodos para expor 
 
 ```js
   getProdutoById(id) {
-    return this.produtos.find(produto => produto.id === parseInt(id));
+    return this.produtos.find(produto => produto?.id === parseInt(id));
   }
   getProdutos() {
     return this.produtos;
@@ -218,6 +232,7 @@ Fica a sugestão de revisar os métodos básicos de array como **find, filter, p
 Vamos criar um componente de listagem, a qual vai exibir a lista de produtos. Esse componente é o ProdutosList.js.
 
 10. Base do componente:
+    
 ```js
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -237,9 +252,9 @@ const ProdutosList = () => {
 export default ProdutosList;
 
 ```
-11. O passo anterior cria um componente vazio. Para armazenar a lista de produtos, vamos criar uma propriedade para o componente com **useState**. Lembrando que o *useState* é um elemento do react para gerenciar o estado do componente.
+1.  O passo anterior cria um componente vazio. Para armazenar a lista de produtos, vamos criar uma propriedade para o componente com **useState**. Lembrando que o *useState* é um elemento do react para gerenciar o estado do componente.
 
-```
+```js
   const [produtos, setProdutos] = useState([]);
 ```
 
@@ -255,6 +270,7 @@ useEffect(() => {
 Esse trecho de código é executado na inicialização do componente.
 
 O código do componente neste momento deve estar assim:
+
 ```js
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -286,6 +302,7 @@ Ainda sobre o **useEffect**, ele tem como parâmetro uma função *callback*, e 
 
 11. Usando o *produtosService*
 Vamos usar esse componente para recuperar a lista de produtos. A lista deve ser carregada na inicialização do componente. Logo, seu uso deve estar no useEffect. Veja no exemplo a seguir:
+
 ```js
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -303,11 +320,13 @@ Repare que ele cria um método chamado de fetchProdutos e depois o executa com a
 Dentro do método fetchProdutos, temos os termos de async e await, necessárias nas operação assíncrona como as de banco de dados que vão ser implementadas no futuro.
 
 A operação a seguir, recupera os produtos e define a propriedade produtos com **setProduto**. Este último definido no useState.
+
 ```js
 const produtos = await produtosService.getProdutos();
 setProdutos(produtos);
 ```
 12. Para testar usem um console.log visualizando os produtos retornados na inicialização do componente.
+
 ```js
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -320,7 +339,8 @@ setProdutos(produtos);
   }, []);
 ```
 
-13. Estando tudo certo(SE DEUS QUISER!), vamos exibir os produtos, lá no return do componente.
+1.  Estando tudo certo(SE DEUS QUISER!), vamos exibir os produtos, lá no return do componente.
+
 ```js
 return (
     <div className="container mt-5">
@@ -344,9 +364,52 @@ Nesse código, observe o método **map**  MUITO COMUM para operações em lista 
 Observe também a propriedade **key** obrigatória para elementos em lista.
 Observe :(, o uso do <Link> do react-router-dom, para criar o link.
 
+Assim o componente final *ProdutoList* fica assim:
+```js
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import produtosService from '../services/ProdutosService';
+
+const ProdutosList = () => {
+
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      const produtos = await produtosService.getProdutos();
+      setProdutos(produtos);
+      console.log(produtos);
+    };
+
+    fetchProdutos();
+  }, []);
+
+  return (
+    <div className="container mt-5">
+      <h1>Produtos</h1>
+      <ul className="list-group">
+        {
+            produtos.map(product => (
+              <li key={product.id} className="list-group-item d-flex justify-content-between">
+                <Link to={`/produtos/${product.id}`}>{product.nome}</Link>
+                <Link to={`/produtos/${product.id}/editar`}>editar</Link>
+              </li>
+            ))
+        }
+      </ul>
+    </div>
+  );
+};
+
+export default ProdutosList;
+
+
+```
+
 ## Exibindo detalhes
 Uma vez estando página(componente) de listagem, é muito comum que se deseje ver detalhes de algum conteúdo da lista.
 Na ProdutoList, há os links dentro do <li>:
+
 ```js
  <Link to={`/produtos/${product.id}`}>{product.nome}</Link>
  <Link to={`/produtos/${product.id}/editar`}>editar</Link>
@@ -354,7 +417,7 @@ Na ProdutoList, há os links dentro do <li>:
 
 Os links convergem com as rotas criadas no App.js, relembre :)
 ```js
-  ...
+   ...
    <Route path="/produtos/:id" element={<ProdutoDetalhe />} />
    <Route path="/produtos/:id/editar" element={<ProdutoEditar />} />
   ...
@@ -387,6 +450,7 @@ Lendo parâmetro com *useParams()*, vamos ler o id com a instrução:
 Deve ficar claro que o nome do parâmetro, nesse caso **id** deve ser igual ao definido nas rotas no App.js(Ver o arquivo :/).
 Esse **id** vai nos ajudar a buscar o produto no banco de dados através da nossa classe de serviços ProdutosService.
 O componente ProdutoDetalhe vai exibir os detalhes de um produto, logo vamos criar uma variável local com useState para ter o produto atual. Veja o código a seguir:
+
 ```js
 import React, { useEffect, useState } from 'react';
 const ProdutoDetalhe = () => {
@@ -433,6 +497,7 @@ Relembre que no bom uso do *useEffect**, há a definição da função e posteri
 16. Exibir detalhes do produto no html
 Na função return, ela vai apresentar o HTML/JSX que vai exibir os detalhes do produto:
 A seguir, apenas o trecho do return:
+
 ```js
  return (
     <div className="container mt-5">
@@ -457,7 +522,8 @@ A seguir, apenas o trecho do return:
     </div>
  );
 ```
-17. Exibindo detalhes de return 
+17. Exibindo detalhes de return
+
 ```js
  return (
     <div className="container mt-5">
@@ -487,6 +553,7 @@ A seguir, apenas o trecho do return:
   ```
 
   Observe o uso da linguagem de templates com o uso de como **{}**, como em 
+
   ```js
    <h2>{produto?.nome}</h2>
            
@@ -533,7 +600,9 @@ export default ProdutoComentarios;
 Observe o parametro da função **{produto}**, ele é a referência do produto a qual os detalhes serão exibidos.
 
 19. Vamos retornar ao componente ProdutoDetalhe.js e vamos referênciar esse nosso novo componente.
-***ProdutoDetalhe.js***
+
+### ProdutoDetalhe.js ###
+
 ```js
 return (
     <div className="container mt-5">
@@ -567,6 +636,7 @@ return (
   );
 ```
 ***A novidade:***
+
 ```js
 <div className="row">
   <div className="col-md-12">
@@ -577,6 +647,7 @@ return (
 *** Veja na tela!
 
 19. Vamos ao componente ProdutoComentarios, adicionando a lista de comentários:
+
 ```js
 import React, { useEffect, useState } from 'react';
 import produtosService from '../services/ProdutosService';
@@ -634,15 +705,238 @@ Vamos exibir a lista fazendo o já conhecido laço com a função **map** sobre 
 ```
 
 Observe o atributo **key={index}**, o segundo parâmetro index no map
+
 ```js
    {comentarios.map((comentario, index) => (
 ```
 
-Feito isso temos o componente ProdutoDetalhes com comentários. Faltando 'apenas' o *ProdutoEditar*.
+
+### ProdutoComentarios - código ###
+```js
+import React, { useEffect, useState } from 'react';
+import produtosService from '../services/ProdutosService';
+
+const ProdutoComentarios = ({produto, novo = false}) => {
+  const [comentarios, setComentarios] = useState([]);
+
+  const [novoComentario, setNovoComentario] = useState('');
+  const [autor, setAutor] = useState('');
+
+
+  useEffect(() => {
+    const fetchComentarios = async () => {
+      const comentariosResult = produtosService.getComentariosByProdutosId(produto?.id);
+      setComentarios(comentariosResult);
+    }
+
+    fetchComentarios();
+  }, []);
+
+  const handleAddComentario = async () => {
+    if (!novoComentario || !autor) {
+      return;
+    }
+
+    const novoComentarioObj = {
+      idProduto: produto.id,
+      comentario: novoComentario,
+      autor,
+      data: new Date().toISOString().split('T')[0],
+    };
+
+    const addedComentario = await produtosService.addComentario(produto, novoComentarioObj);
+
+    setComentarios([...comentarios, addedComentario]);
+
+    setNovoComentario('');
+    setAutor('');
+  };
+
+  return (
+    <div className="container mt-5">
+        {
+          novo ? 
+            (
+              <div className="card p-3">
+                <h5 className="mb-3">Adicionar Comentário</h5>
+                <div className="mb-3">
+                  <label htmlFor="autorInput" className="form-label">
+                    Autor
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="autorInput"
+                    value={autor}
+                    onChange={(e) => setAutor(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="comentarioInput" className="form-label">
+                    Comentário
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="comentarioInput"
+                    rows="3"
+                    value={novoComentario}
+                    onChange={(e) => setNovoComentario(e.target.value)}
+                  />
+                </div>
+                <button type="button" className="btn btn-primary" onClick={handleAddComentario}>
+                  Enviar Comentário
+                </button>
+              </div>
+            )
+            :
+            (<></>)
+        }
+
+        {comentarios?.length > 0 ? (
+          <div className="list-group">
+            {comentarios.map((comentario, index) => (
+              <div key={index} className="list-group-item">
+                <div className="d-flex align-items-start">
+                <img
+                  src={'default-avatar.png'}
+                  alt="Avatar"
+                  className="rounded-circle"
+                  style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                />
+                  <div className="ms-3">
+                    <h5 className="fw-bold mb-1">{comentario?.autor}</h5>
+                    <p className="mb-2 text-muted" style={{ fontSize: '0.9rem' }}>
+                      {new Date(comentario?.data).toLocaleDateString('pt-BR')}
+                    </p>
+                    <p>{comentario?.comentario}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-muted">Sem comentários</p>
+        )}
+    </div>
+  );
+};
+
+export default ProdutoComentarios;
+
+```
+
+Feito isso temos o componente ProdutoDetalhes com comentários. Faltando 'apenas' o *ProdutoEditar* na próxima seção.
 
 ## ProdutoEditar
 
-21.Por enquanto o ProdutoEditar não edita o produto, ele apenas permite novos comentários e sua implementação requer um ajuste no componente ProdutoComentario.js
+21. Por enquanto, o ProdutoEditar não edita o produto, ele apenas permite novos comentários e sua implementação requer um ajuste no componente ProdutoComentario.js
+
+### ProdutoEditar - código ###
+```js
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import produtosService from '../services/ProdutosService';
+import ProdutoComentarios from './ProdutoComentarios';
+
+const ProdutoEditar = () => {
+
+  /**NAVEGACAO */
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+
+  const [produto, setProduto] = useState(null);
+
+  useEffect(() => {
+    const fetchProduto = async () => {
+      const produtoEncontrado = produtosService.getProdutoById(id);
+      setProduto(produtoEncontrado);
+    };
+
+    fetchProduto();
+  }, [id]);
+
+  /*TODO criar no futuro uma chamada para todos os produtos da mesma categoria*/
+  const handleProdutosRelacionados = (produto) => {
+    navigate(`/produtos/${produto.id}`);
+  };
+
+  return (
+    <div className="container mt-5">
+      {produto ? (
+        <>
+        <div className="row">
+          <div className="col">
+            <Link to="/produtos" className="btn btn-secondary float-start">Voltar</Link>
+          </div>
+          <div className="col text-end">
+            <button className="btn btn-primary" onClick={() => handleProdutosRelacionados(produto)}>
+              Produtos Relacionados(A FAZER)
+            </button>
+          </div>
+        </div>
+        
+        <div className="row">
+          <div className="col-md-8">
+           
+            <h2>{produto.nome}</h2>
+           
+            <p>Descrição: {produto.descricao}</p>
+          
+          </div>
+          <div className="col-md-4">
+            <img src={produto.imagem} alt={produto.nome} className="img-fluid" />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <ProdutoComentarios produto={produto} novo="true" />
+          </div>
+        </div>
+        </>
+      ) : (
+        <p>Produto não encontrado</p>
+      )}
+    </div>
+  );
+};
+
+export default ProdutoEditar;
+
+```
+*** Comentários ***
+A) O código acima, tem o destaque para o  método que faz a navegação a partir do clique no link:
+```js
+  /*TODO criar no futuro uma chamada para todos os produtos da mesma categoria*/
+  const handleProdutosRelacionados = (produto) => {
+    navigate(`/produtos/${produto.id}`);
+  };
+
+```
+Chamando a função
+```html
+  <div className="col text-end">
+    <button className="btn btn-primary" onClick={() => handleProdutosRelacionados(produto)}>
+        Produtos Relacionados(A FAZER)
+    </button>
+  </div>
+```
+
+B) Há tb a chamada para o *ProdutoComentarios* passado o produto como property.
+```html
+    <div className="row">
+        <div className="col-md-12">
+        <ProdutoComentarios produto={produto} novo="true" />
+        </div>
+    </div>
+```
+
+
+
+
+
+
+
 
 
 
